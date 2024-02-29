@@ -4,7 +4,7 @@ import { untar } from './untar';
 import { computeHash, computeIntegrity } from './hash';
 import { PiletMetadata, PackageData, PackageFiles, Pilet } from '../types';
 
-const packageRoot = 'package/';
+const packageRoot = 'react-18.2.0/';
 const checkV1 = /^\/\/\s*@pilet\s+v:1\s*\(([A-Za-z0-9\_\:\-]+)\)/;
 const checkV2 = /^\/\/\s*@pilet\s+v:2\s*(?:\(([A-Za-z0-9\_\:\-]+),\s*(.*)\))?/;
 const checkV3 = /^\/\/\s*@pilet\s+v:3\s*(?:\(([A-Za-z0-9\_\:\-]+),\s*(.*)\))?/;

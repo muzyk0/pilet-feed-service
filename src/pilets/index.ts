@@ -1,4 +1,4 @@
-import { getPilets, setPilet, piletData } from '../db';
+import { getPilets, piletData, setPilet } from '../db';
 import { getPiletDefinition } from '../helpers';
 import { PiletMetadata } from '../types';
 

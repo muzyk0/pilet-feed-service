@@ -1,9 +1,11 @@
 import { RequestHandler } from 'express';
 import { join, sep } from 'path';
 import { lookup } from 'mime-types';
-import { latestPilets, storePilet } from '../pilets';
+import { latestPilets /*storePilet*/ } from '../pilets';
 import { getPilet } from '../db';
 import { PiletDb } from '../types';
+
+// const busboy = require('busboy');
 
 export const getFiles = (): RequestHandler => async (req, res, next) => {
   const { name, version, org, file, 2: directoryPath = '' } = req.params;
@@ -51,33 +53,37 @@ export interface SnapshotApi {
   update(db: PiletDb): Promise<void>;
 }
 
-export const publishPilet =
-  (rootUrl: string, snapshot: SnapshotApi): RequestHandler =>
-  (req, res) => {
-    const bb = (req as any).busboy;
-
-    if (bb) {
-      req.pipe(bb);
-
-      bb.on('file', (_: any, file: NodeJS.ReadableStream) =>
-        storePilet(file, rootUrl)
-          .then(snapshot.update)
-          .then(() =>
-            res.status(200).json({
-              success: true,
-            }),
-          )
-          .catch((err) =>
-            res.status(err.message?.indexOf('already exists') !== -1 ? 409 : 400).json({
-              success: false,
-              message: err.message,
-            }),
-          ),
-      );
-    } else {
-      res.status(400).json({
-        success: false,
-        message: 'Missing file upload.',
-      });
-    }
-  };
+// export const publishPilet =
+//   (rootUrl: string, snapshot: SnapshotApi): RequestHandler =>
+//   (req, res) => {
+//     let bb = req.busboy;
+//
+//     if (!bb) {
+//       bb = busboy({ headers: req.headers });
+//     }
+//
+//     if (bb) {
+//       req.pipe(bb);
+//
+//       bb.on('file', (_: any, file: NodeJS.ReadableStream) =>
+//         storePilet(file, rootUrl)
+//           .then(snapshot.update)
+//           .then(() =>
+//             res.status(200).json({
+//               success: true,
+//             }),
+//           )
+//           .catch((err) =>
+//             res.status(err.message?.indexOf('already exists') !== -1 ? 409 : 400).json({
+//               success: false,
+//               message: err.message,
+//             }),
+//           ),
+//       );
+//     } else {
+//       res.status(400).json({
+//         success: false,
+//         message: 'Missing file upload.',
+//       });
+//     }
+//   };

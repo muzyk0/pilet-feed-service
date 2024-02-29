@@ -14,7 +14,8 @@
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "moduleResolution": "node",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "emitDecoratorMetadata": true
   },
   "include": [
     "src/**/*"

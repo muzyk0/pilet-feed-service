@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import { getActiveAuthRequest } from '../db';
+// import { getActiveAuthRequest } from '../db';
 
 const authHeaderExtract = /^basic\s+([a-fA-F0-9]+)$/i;
 
@@ -24,22 +24,22 @@ export const checkAuth =
     }
   };
 
-export const checkAuthRequestId = (): RequestHandler => async (req, res, next) => {
-  const { id } = req.query;
-
-  if (typeof id !== 'string') {
-    return res.status(400).json({
-      message: 'Missing required query parameter "id".',
-    });
-  }
-
-  const activeRequest = getActiveAuthRequest(id);
-
-  if (!activeRequest) {
-    return res.status(404).json({
-      message: 'The provided authorization request does not exist.',
-    });
-  }
-
-  next();
-};
+// export const checkAuthRequestId = (): RequestHandler => async (req, res, next) => {
+//   const { id } = req.query;
+//
+//   if (typeof id !== 'string') {
+//     return res.status(400).json({
+//       message: 'Missing required query parameter "id".',
+//     });
+//   }
+//
+//   // const activeRequest = getActiveAuthRequest(id);
+//   //
+//   // if (!activeRequest) {
+//   //   return res.status(404).json({
+//   //     message: 'The provided authorization request does not exist.',
+//   //   });
+//   // }
+//
+//   next();
+// };

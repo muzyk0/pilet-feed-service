@@ -10,6 +10,7 @@
     "test:watch": "npm run test:unit -- --watch",
     "test": "npm run lint && npm run test:unit",
     "start": "node dist/cli.js",
+    "dev": "nodemon src/cli.ts",
     "watch": "node index.js",
     "lint": "eslint -c .eslintrc.js 'src/**/*.ts'",
     "prettier": "prettier --config prettier.config.js --write 'src/**/*.ts'",
@@ -47,8 +48,12 @@
     "graphql-tag": "^2.12.6",
     "graphql-type-json": "^0.3.2",
     "mime-types": "^2.1.35",
+    "nodemon": "^3.1.0",
+    "pg": "^8.11.3",
+    "reflect-metadata": "^0.2.1",
     "response-time": "^2.3.2",
-    "tar": "^6.2.0"
+    "tar": "^6.2.0",
+    "typeorm": "^0.2.45"
   },
   "devDependencies": {
     "@types/connect-busboy": "^0.0.3",
